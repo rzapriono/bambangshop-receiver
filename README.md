@@ -67,17 +67,17 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement add function in Notification repository.`
     -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
     -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
--   **STAGE 3: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Commit: `Implement receive_notification function in Notification service.`
-    -   [ ] Commit: `Implement receive function in Notification controller.`
-    -   [ ] Commit: `Implement list_messages function in Notification service.`
-    -   [ ] Commit: `Implement list function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+-   **STAGE 2: Implement services and controllers**
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Commit: `Implement receive_notification function in Notification service.`
+    -   [x] Commit: `Implement receive function in Notification controller.`
+    -   [x] Commit: `Implement list_messages function in Notification service.`
+    -   [x] Commit: `Implement list function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -94,3 +94,15 @@ This is the place for you to write reflections:
     Berbeda dengan java, rust secara default tidak mengizinkan variabel static untuk diubah datanya (immutable). Hal ini bertujuan untuk mencegah terjadinya race condition. Untuk mengatasi ini, Rust menggunakan lazy static yang memungkinkan definisi variabel static yang mutable dengan aman menggunakan mekanisme seperti Mutex atau RwLock, yang mengelola akses ke variabel tersebut. Lazy static memungkinkan penggunaan variabel static dengan cara yang mirip dengan java, namun tetap aman sesuai dengan model concurrency pada rust.
 
 #### Reflection Subscriber-2
+1. Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.
+
+    Saya telah melihat bagian kode src/lib.rs. Di dalam src/lib.rs, terdapat beberapa elemen penting seperti konfigurasi dan dependensi aplikasi. Selain itu terdapat inisialisasi variablel static di lazy_static, misalnya REQWEST_CLIENT dan APP_CONFIG yang dipakai dalam mengimplementasi kode. Selain itu, ada fungsi compose_error_response untuk pesan error kustom. Informasi yang diperlukan untuk aplikasi, seperti manajemen error dengan Error sebagai default untuk tipe Result dan ErrorResponse untuk respons kesalahan, juga telah disediakan. Jadi secara keseluruhan, src/lib.rs berfungsi untuk mendefinisikan komponen-komponen yang diperlukan dalam aplikasi.
+
+2. Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy enough to add to the system?
+
+    Observer Pattern memudahkan saya dalam menambahkan subscriber ke sistem notifikasi dengan cara mendaftarkan mereka menggunakan method subscribe dan memasukkan mereka ke dalam daftar subscriber, yang membuat code architecture menjadi lebih fleksibel dan scalable. Hal ini karena di dalam Observer pattern dilakukan pemisahan antara publisher dan observernya. Spawning lebih dari 1 instance Main app akan mudah dilakukan karena terdapat parallel processing untuk notificationnya, sehingga membuat kode lebih efisien. Ketika ada subscriber baru yang berlangganan, mereka akan ditambahkan ke dalam daftar observer. Misalnya, jika instance dari Main app di spawn, tidak akan ada masalah karena proses pendaftaran subscriber akan disesuaikan dengan API yang relevan.
+
+
+3. Have you tried to make your own Tests, or enhance documentation on your Postman collection? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).
+
+    Ya, saya sudah mencobanya. Menurut saya, Postman dapat menjadi tools yang sangat bermanfaat dalam proses testing API dengan mengirimkan HTTP request dan memverifikasi responsenya. Dengan menggunakan Postman collection, saya dapat dengan mudah mengatur data yang dikirimkan dalam HTTP request dan memastikan bahwa program memberikan response yang benar. Keuntungan utama menggunakan postman adalah kemampuan untuk testing API tanpa harus menggunakan data aktual dari program, sehingga mempermudah proses development dan testing. Fitur-fitur pada postman kemungkinan besar akan sangat berguna kedepannya untuk mengerjakan TK karena mempermudah dalam melakukan testing API pada suatu endpoint dan responsenya secara otomatis.
